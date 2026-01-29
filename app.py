@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import pandas as pd
 import plotly.graph_objects as go
 from src.resume_parser import extract_text_from_resume
@@ -141,7 +142,11 @@ if uploaded_file:
     with tab2:
         st.markdown('<div class="section-card fade-in">', unsafe_allow_html=True)
 
-        results = match_resume_to_jobs(resume_text, "data/jobs.csv")
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        JOBS_PATH = os.path.join(BASE_DIR, "data", "jobs.csv")
+
+        results = match_resume_to_jobs(resume_text, JOBS_PATH)
+
         results["match_percentage"] = (results["match_score"] * 100).round(2)
 
         def get_common_keywords(resume_text, job_description):
