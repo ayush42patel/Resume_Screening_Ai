@@ -1,8 +1,8 @@
-# 🚀 AI Resume Optimizer & Career Assistant
+# 🚀 AI Resume Screening & Career Assistant
 
-An AI-powered resume screening and career guidance system that analyzes resumes, matches jobs using NLP, detects skill gaps, and provides intelligent improvement suggestions.
+An **AI-powered resume screening and career intelligence system** that analyzes resumes, matches jobs using NLP, detects skill gaps, and provides intelligent improvement suggestions.
 
-This project simulates how modern recruitment platforms and ATS (Applicant Tracking Systems) evaluate candidates.
+This project simulates how modern **recruitment platforms** and **ATS (Applicant Tracking Systems)** evaluate candidates.
 
 ---
 
@@ -13,14 +13,14 @@ This project simulates how modern recruitment platforms and ATS (Applicant Track
 
 ## 🎯 Project Objective
 
-To build an intelligent system that:
+To build an intelligent system that can:
 
-- Extracts skills from resumes (PDF)
-- Matches resumes with job roles using NLP similarity
-- Identifies missing skills
-- Evaluates ATS keyword compatibility
-- Generates AI-based resume improvement suggestions
-- Suggests projects, learning roadmap, and better resume bullet points
+- Extract skills from resumes (PDF)
+- Match resumes with job roles using NLP similarity
+- Identify missing skills (Skill Gap Analysis)
+- Evaluate ATS keyword compatibility
+- Generate AI-based resume improvement suggestions
+- Suggest projects, learning roadmap, and stronger resume bullet points
 
 ---
 
@@ -28,14 +28,30 @@ To build an intelligent system that:
 
 | Feature | Description |
 |--------|-------------|
-| 📄 Resume Parsing | Extracts clean text from PDF resumes |
-| 🧠 Skill Extraction | Identifies technical skills using NLP + keyword matching |
-| 🔍 Job Matching | Uses TF-IDF + Cosine Similarity |
-| 📉 Skill Gap Analysis | Detects missing skills vs job requirements |
-| 📊 ATS Score | Evaluates keyword compatibility |
-| 💡 AI Suggestions | Resume improvement advice |
-| ✍ Bullet Rewriter | Generates strong resume bullet points |
-| 🚀 Career Booster | Suggests projects + skill roadmap |
+| 📄 Resume Parsing | Extracts structured text from PDF resumes |
+| 🧠 Skill Extraction | NLP-based keyword detection of technical skills |
+| 🔍 Job Matching | TF-IDF Vectorization + Cosine Similarity |
+| 📉 Skill Gap Analysis | Identifies missing skills compared to job requirements |
+| 📊 ATS Score | Keyword density evaluation |
+| 💡 AI Suggestions | Resume improvement recommendations |
+| ✍ Bullet Rewriter | Generates impact-driven resume bullet points |
+| 🚀 Career Booster | Suggests projects + personalized skill roadmap |
+
+---
+
+## ⚙️ System Workflow
+
+1. Resume PDF uploaded  
+2. Text extraction using NLP pipeline  
+3. Skills identified  
+4. Resume matched against jobs dataset  
+5. AI generates:
+   - Match Score
+   - Missing Skills
+   - ATS Score
+   - Resume Suggestions
+   - Project Ideas
+   - Learning Roadmap
 
 ---
 
@@ -43,14 +59,15 @@ To build an intelligent system that:
 
 - **Python**
 - **Streamlit**
-- **Scikit-learn (TF-IDF, Cosine Similarity)**
+- **Scikit-learn** (TF-IDF, Cosine Similarity)
 - **Pandas**
 - **PDFPlumber**
-- **Plotly** (Score Gauge)
+- **Plotly** (Interactive Score Gauge)
 
 ---
 
 ## 📁 Project Structure
+
 ```bash
 resume_screening_ai/
 │
@@ -58,51 +75,11 @@ resume_screening_ai/
 ├── requirements.txt
 │
 ├── data/
-│ └── jobs.csv
+│   └── jobs.csv
 │
 └── src/
-│ ├── resume_parser.py
-│ ├── skill_extractor.py
-│ ├── matcher.py
-│ ├── suggestion_engine.py
-│ └── ai_career_tools.py
-```
-
----
-
-## 🚀 How It Works
-
-1. User uploads resume
-2. System extracts text
-3. Skills are identified
-4. Resume is matched against jobs dataset
-5. AI generates:
-   - Match score
-   - Missing skills
-   - ATS score
-   - Suggestions
-   - Project ideas
-   - Skill roadmap
-
----
-
-## 💡 Real-World Relevance
-
-This project demonstrates how:
-
-- ATS systems filter resumes
-- NLP is used in recruitment tech
-- AI can assist in career development
-
----
-
-## 📬 Contact
-
-**Ayush Patel**  
-🎓 B.Tech CSE (Data Science)  
-🔗 GitHub: https://github.com/ayush42patel  
-🔗 LinkedIn: https://www.linkedin.com/in/ayush-42-patel/
-
----
-
-⭐ If you found this useful, consider starring the repo!
+    ├── resume_parser.py
+    ├── skill_extractor.py
+    ├── matcher.py
+    ├── suggestion_engine.py
+    └── ai_career_tools.py
