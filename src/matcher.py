@@ -21,6 +21,12 @@ META_PATH = os.path.join(DATA_DIR, "jobs_meta.pkl")
 FULL_DATA = os.path.join(DATA_DIR, "jobs.csv")
 SAMPLE_DATA = os.path.join(DATA_DIR, "jobs_sample.csv")
 
+# 🔥 TECH STACK FILTER (skill-based, not job title)
+STRICT_TECH_SKILLS = [
+    "python", "sql", "pandas", "numpy", "tensorflow", "pytorch",
+    "scikit", "aws", "azure", "spark", "power bi", "tableau",
+    "machine learning", "deep learning", "nlp"
+]
 
 def get_jobs_path():
     return FULL_DATA if os.path.exists(FULL_DATA) else SAMPLE_DATA
@@ -32,37 +38,49 @@ def build_index():
     jobs_path = get_jobs_path()
     df = pd.read_csv(jobs_path)
 
+    # 🎯 Keep only jobs that contain tech stack skills
+    def is_tech_job(row):
+        skills = str(row.get("required_skills", "")).lower()
+        return any(skill in skills for skill in STRICT_TECH_SKILLS)
+
+    df = df[df.apply(is_tech_job, axis=1)]
+    print(f"Tech jobs retained: {len(df)}")
+    print(df["job_title"].head(10).tolist())
+
+    # Normalize text for consistent vector space
     texts = (df["job_description"].fillna("") + " " + df["required_skills"].fillna("")).apply(normalize_text)
 
     vectorizer = TfidfVectorizer(stop_words="english", max_features=5000)
-    job_vectors = vectorizer.fit_transform(texts).toarray()
+    job_vectors = vectorizer.fit_transform(texts).toarray().astype("float32")
 
+    # Save artifacts
     pickle.dump(vectorizer, open(VECTORIZER_PATH, "wb"))
     df.to_pickle(META_PATH)
 
     if FAISS_AVAILABLE:
         dim = job_vectors.shape[1]
         index = faiss.IndexFlatL2(dim)
-        index.add(job_vectors.astype("float32"))
+        index.add(job_vectors)
         faiss.write_index(index, INDEX_PATH)
 
-    print("Index built.")
+    print("Index built successfully.")
+    
 
 
 def match_resume_to_jobs(resume_text):
 
-    # Build index if missing
+    # Auto-build index if missing (cloud safe)
     if not os.path.exists(VECTORIZER_PATH) or not os.path.exists(META_PATH):
         build_index()
 
     vectorizer = pickle.load(open(VECTORIZER_PATH, "rb"))
     jobs_df = pd.read_pickle(META_PATH)
 
-    resume_vec = vectorizer.transform([resume_text]).toarray()
+    resume_vec = vectorizer.transform([resume_text]).toarray().astype("float32")
 
     if FAISS_AVAILABLE and os.path.exists(INDEX_PATH):
         index = faiss.read_index(INDEX_PATH)
-        distances, indices = index.search(resume_vec.astype("float32"), 10)
+        distances, indices = index.search(resume_vec, 10)
         results = jobs_df.iloc[indices[0]].copy()
         results["match_score"] = 1 / (1 + distances[0])
     else:
