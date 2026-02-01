@@ -1,26 +1,26 @@
 # 🚀 AI Resume Screening & Career Assistant
 
-An **AI-powered resume screening and career intelligence system** that analyzes resumes, matches jobs using NLP, detects skill gaps, and provides intelligent improvement suggestions.
+An **AI-powered resume screening and career intelligence system** that analyzes resumes, performs semantic job matching, detects skill gaps, evaluates ATS compatibility, and provides intelligent career improvement suggestions.
 
-This project simulates how modern **recruitment platforms** and **ATS (Applicant Tracking Systems)** evaluate candidates.
+This project simulates how modern **AI recruitment engines** and **Applicant Tracking Systems (ATS)** evaluate candidates.
 
 ---
 
-## 🌐 Live Demo
+## 🌐 Live Demo  
 🔗 https://resume-screening-ai-ap.streamlit.app/
 
 ---
 
 ## 🎯 Project Objective
 
-To build an intelligent system that can:
+To design an intelligent pipeline that can:
 
 - Extract skills from resumes (PDF)
-- Match resumes with job roles using NLP similarity
-- Identify missing skills (Skill Gap Analysis)
-- Evaluate ATS keyword compatibility
-- Generate AI-based resume improvement suggestions
-- Suggest projects, learning roadmap, and stronger resume bullet points
+- Match resumes with real job roles using **NLP similarity search**
+- Identify missing skills (**Skill Gap Analysis**)
+- Evaluate **ATS keyword compatibility**
+- Generate AI-driven resume improvement suggestions
+- Recommend projects and learning roadmaps
 
 ---
 
@@ -29,13 +29,14 @@ To build an intelligent system that can:
 | Feature | Description |
 |--------|-------------|
 | 📄 Resume Parsing | Extracts structured text from PDF resumes |
-| 🧠 Skill Extraction | NLP-based keyword detection of technical skills |
-| 🔍 Job Matching | TF-IDF Vectorization + Cosine Similarity |
-| 📉 Skill Gap Analysis | Identifies missing skills compared to job requirements |
-| 📊 ATS Score | Keyword density evaluation |
-| 💡 AI Suggestions | Resume improvement recommendations |
+| 🧠 Skill Extraction | NLP-based technical skill identification |
+| 🔍 Smart Job Matching | **TF-IDF Vectorization + FAISS Similarity Search** |
+| 🧩 Tech Role Filtering | Filters only **software/AI/data** jobs using skill-based filtering |
+| 📉 Skill Gap Analysis | Detects missing skills per matched role |
+| 📊 ATS Score | Measures resume keyword alignment with job skills |
+| 💡 AI Suggestions | Resume improvement & optimization tips |
 | ✍ Bullet Rewriter | Generates impact-driven resume bullet points |
-| 🚀 Career Booster | Suggests projects + personalized skill roadmap |
+| 🚀 Career Booster | Project suggestions + personalized skill roadmap |
 
 ---
 
@@ -43,15 +44,30 @@ To build an intelligent system that can:
 
 1. Resume PDF uploaded  
 2. Text extraction using NLP pipeline  
-3. Skills identified  
-4. Resume matched against jobs dataset  
-5. AI generates:
-   - Match Score
+3. Technical skills detected  
+4. Resume vector compared against job dataset  
+5. System generates:
+   - Job Match Score
    - Missing Skills
-   - ATS Score
+   - ATS Compatibility Score
    - Resume Suggestions
    - Project Ideas
    - Learning Roadmap
+
+---
+
+## 🧠 Matching Architecture
+```bash
+Resume → Text Cleaning → Skill Extraction
+↓
+TF-IDF Vectorization
+↓
+FAISS Similarity Search
+↓
+Tech-Filtered Job Roles
+↓
+Skill Gap + ATS + AI Suggestions
+```
 
 ---
 
@@ -59,10 +75,11 @@ To build an intelligent system that can:
 
 - **Python**
 - **Streamlit**
-- **Scikit-learn** (TF-IDF, Cosine Similarity)
+- **Scikit-learn** (TF-IDF)
+- **FAISS** (Fast similarity search)
 - **Pandas**
 - **PDFPlumber**
-- **Plotly** (Interactive Score Gauge)
+- **Plotly** (Interactive metrics)
 
 ---
 
@@ -75,11 +92,35 @@ resume_screening_ai/
 ├── requirements.txt
 │
 ├── data/
-│   └── jobs.csv
+│   ├── jobs_sample.csv      # Cloud dataset
+│   └── (jobs.csv local only)
 │
 └── src/
     ├── resume_parser.py
     ├── skill_extractor.py
     ├── matcher.py
     ├── suggestion_engine.py
-    └── ai_career_tools.py
+    ├── ai_career_tools.py
+    └── text_utils.py
+```
+
+## ☁️ Deployment Design
+
+| Environment | Dataset Used |
+|--------|-------------|
+| Local | Full Kaggle job dataset |
+| Streamlit Cloud | Lightweight sample dataset |
+| Vector Index | Auto-built at runtime |
+
+## 🚀 Future Improvements
+
+- **Sentence-BERT semantic matching**
+- **Salary trend prediction**
+- **Role-based recommendation system**
+- **Job market analytics dashboard**
+
+## 👨‍💻 Author
+
+Ayush Patel<br>
+B.Tech CSE (Data Science)<br>
+Open to AI/ML internships, research roles, and collaborations.
