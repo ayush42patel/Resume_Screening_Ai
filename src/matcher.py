@@ -16,13 +16,21 @@ DATA_DIR = "data"
 VECTORIZER_PATH = os.path.join(DATA_DIR, "vectorizer.pkl")
 INDEX_PATH = os.path.join(DATA_DIR, "faiss_index.bin")
 META_PATH = os.path.join(DATA_DIR, "jobs_meta.pkl")
-JOBS_PATH = os.path.join(DATA_DIR, "jobs.csv")
+
+FULL_DATA = os.path.join(DATA_DIR, "jobs.csv")
+SAMPLE_DATA = os.path.join(DATA_DIR, "jobs_sample.csv")
+
+
+def get_jobs_path():
+    return FULL_DATA if os.path.exists(FULL_DATA) else SAMPLE_DATA
 
 
 def build_index():
     print("Building vector index...")
 
-    df = pd.read_csv(JOBS_PATH)
+    jobs_path = get_jobs_path()
+    df = pd.read_csv(jobs_path)
+
     texts = (df["job_description"].fillna("") + " " + df["required_skills"].fillna(""))
 
     vectorizer = TfidfVectorizer(stop_words="english", max_features=5000)
@@ -42,17 +50,12 @@ def build_index():
 
 def match_resume_to_jobs(resume_text):
 
-    # If artifacts missing → build them
+    # Build index if missing
     if not os.path.exists(VECTORIZER_PATH) or not os.path.exists(META_PATH):
         build_index()
 
     vectorizer = pickle.load(open(VECTORIZER_PATH, "rb"))
-    JOBS_PATH = os.path.join(DATA_DIR, "jobs.csv")
-    SAMPLE_PATH = os.path.join(DATA_DIR, "jobs_sample.csv")
-
-    if not os.path.exists(JOBS_PATH):
-        JOBS_PATH = SAMPLE_PATH
-
+    jobs_df = pd.read_pickle(META_PATH)
 
     resume_vec = vectorizer.transform([resume_text]).toarray()
 
