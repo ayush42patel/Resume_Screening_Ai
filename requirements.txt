@@ -4,3 +4,4 @@ scikit-learn
 pdfplumber
 plotly
 numpy
+faiss-cpu
