@@ -14,9 +14,9 @@ except:
     FAISS_AVAILABLE = False
 
 DATA_DIR = "data"
-VECTORIZER_PATH = os.path.join(DATA_DIR, "vectorizer.pkl")
-INDEX_PATH = os.path.join(DATA_DIR, "faiss_index.bin")
-META_PATH = os.path.join(DATA_DIR, "jobs_meta.pkl")
+VECTORIZER_PATH = os.path.join(DATA_DIR, "vectorizer_v2.pkl")
+INDEX_PATH = os.path.join(DATA_DIR, "faiss_index_v2.bin")
+META_PATH = os.path.join(DATA_DIR, "jobs_meta_v2.pkl")
 
 FULL_DATA = os.path.join(DATA_DIR, "jobs.csv")
 SAMPLE_DATA = os.path.join(DATA_DIR, "jobs_sample.csv")
