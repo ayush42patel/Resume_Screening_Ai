@@ -5,6 +5,7 @@ import numpy as np
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from src.text_utils import normalize_text
 
 try:
     import faiss
@@ -31,7 +32,7 @@ def build_index():
     jobs_path = get_jobs_path()
     df = pd.read_csv(jobs_path)
 
-    texts = (df["job_description"].fillna("") + " " + df["required_skills"].fillna(""))
+    texts = (df["job_description"].fillna("") + " " + df["required_skills"].fillna("")).apply(normalize_text)
 
     vectorizer = TfidfVectorizer(stop_words="english", max_features=5000)
     job_vectors = vectorizer.fit_transform(texts).toarray()
