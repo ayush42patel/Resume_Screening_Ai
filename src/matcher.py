@@ -70,8 +70,7 @@ def build_index():
 def match_resume_to_jobs(resume_text):
 
     # Auto-build index if missing (cloud safe)
-    if not os.path.exists(VECTORIZER_PATH) or not os.path.exists(META_PATH):
-        build_index()
+    build_index()  # always rebuild on startup (cloud safe for sample data)
 
     vectorizer = pickle.load(open(VECTORIZER_PATH, "rb"))
     jobs_df = pd.read_pickle(META_PATH)
