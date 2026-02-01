@@ -1,2 +1,4 @@
-data/
+data/*.csv
 !data/jobs_sample.csv
+data/*.pkl
+data/*.bin
