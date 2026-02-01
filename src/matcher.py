@@ -47,7 +47,12 @@ def match_resume_to_jobs(resume_text):
         build_index()
 
     vectorizer = pickle.load(open(VECTORIZER_PATH, "rb"))
-    jobs_df = pd.read_pickle(META_PATH)
+    JOBS_PATH = os.path.join(DATA_DIR, "jobs.csv")
+    SAMPLE_PATH = os.path.join(DATA_DIR, "jobs_sample.csv")
+
+    if not os.path.exists(JOBS_PATH):
+        JOBS_PATH = SAMPLE_PATH
+
 
     resume_vec = vectorizer.transform([resume_text]).toarray()
 
