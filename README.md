@@ -10,6 +10,21 @@ This project simulates how modern **AI recruitment engines** and **Applicant Tra
 🔗 https://resume-screening-ai-ap.streamlit.app/
 
 ---
+## 📊 Dataset Source
+
+This project uses **real-world job market data** sourced from Kaggle to simulate industry-level recruitment systems.
+
+---
+## 🔹 Dataset Used
+**LinkedIn Job Postings Dataset (Kaggle)**  
+Contains job titles, company names, job descriptions, and required skills.
+
+---
+
+## 🔗 Dataset Link
+https://www.kaggle.com/datasets/asaniczka/1-3m-linkedin-jobs-and-skills-2024
+
+---
 
 ## 🎯 Project Objective
 
